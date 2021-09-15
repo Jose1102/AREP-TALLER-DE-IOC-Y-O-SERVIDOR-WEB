@@ -161,6 +161,24 @@ public class Server {
                 e.printStackTrace();
             }
         }
+
+        else if (path.contains("jpg")){
+            System.out.println("Entra a PNG");
+            try{
+                BufferedImage image = ImageIO.read(new File(System.getProperty("user.dir")+"/src/main/resources/imagenes/siuu.jpg"));
+                ByteArrayOutputStream ArrBytes = new ByteArrayOutputStream();
+                DataOutputStream out1 = new DataOutputStream(outputStream);
+                ImageIO.write(image, "JPG", ArrBytes);
+                out1.writeBytes("HTTP/1.1 200 OK \r\n"
+                        + "Content-Type: image/jpg \r\n"
+                        + "\r\n");
+                out1.write(ArrBytes.toByteArray());
+            }
+
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static int getPort() {
