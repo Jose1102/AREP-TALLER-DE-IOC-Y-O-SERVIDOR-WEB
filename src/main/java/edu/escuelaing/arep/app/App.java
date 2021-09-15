@@ -7,11 +7,16 @@ import java.io.IOException;
 
 
 /**
- * Hello world!
- *
+ * Clase App
+ * @author Jose Maria Castro Ortega
  */
 public class App 
 {
+    /**
+     * Clase main que hace el llamado del Socket y del MicroSpring
+     * @param args
+     * @throws Exception
+     */
     public static void main( String[] args ) throws Exception {
 
         String[] args1=new String[1];

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Hello world!
- *
+ * Clase MicroSpring
+ * @author Jose Maria Castro Ortega
  */
 public class MicroSpring
 {
@@ -15,6 +15,11 @@ public class MicroSpring
 
     private Map<String,Method> lista= new HashMap<>();
 
+    /**
+     * Inicia el microSping, donde hace el llamado de nuestra anotacion RequestMapping
+     * @param args
+     * @throws Exception
+     */
     public void starts(String[] args) throws Exception {
         int contador=0;
         for (Method m : Class.forName(args[0]).getMethods()) {
@@ -31,6 +36,13 @@ public class MicroSpring
 
     }
 
+    /**
+     * Hace el llamado invoke de la anotación que se crea
+     * @param path
+     * @return
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     public  String invoke(String path) throws InvocationTargetException, IllegalAccessException {
         return lista.get(path).invoke(null).toString();
     }

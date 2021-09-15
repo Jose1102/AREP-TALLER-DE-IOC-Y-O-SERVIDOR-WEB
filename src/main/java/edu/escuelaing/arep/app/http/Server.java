@@ -18,14 +18,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+/**
+ * Clase Server
+ * @author Jose Maria Castro Ortega
+ */
 public class Server {
     private MicroSpring microSpring;
     private String mensaje;
 
+    /**
+     * Constructor de la clase Server
+     * @param microSpring
+     */
     public Server(MicroSpring microSpring) {
         this.microSpring = microSpring;
     }
 
+    /**
+     * Corre o inicia el servidor socket
+     * @throws IOException
+     */
     public void start() throws IOException {
         ServerSocket serverSocket = null;
         try {
@@ -95,6 +107,10 @@ public class Server {
         }
     }
 
+    /**
+     * Pagina por defecto
+     * @return un String con u HTML por defecto
+     */
     private String paginaPorDefecto() {
         return "HTTP/1.1 200 OK\r\n"
                 + "Content-Type: text/html\r\n"
@@ -112,7 +128,13 @@ public class Server {
     }
 
 
-
+    /**
+     * Invoca la app con un uri
+     * @param appuri
+     * @param out
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     private void invokeApp(String appuri, PrintWriter out) throws InvocationTargetException, IllegalAccessException {
 
         String header = "HTTP/1.1 200 OK\r\n"
@@ -123,7 +145,12 @@ public class Server {
     }
 
 
-
+    /**
+     * Metodo que dependiendo el formato del path hace el llamado del HTML
+     * @param path
+     * @param out
+     * @param outputStream
+     */
     private void getStaticResource(String path, PrintWriter out, OutputStream outputStream) {
         Path file = Paths.get(System.getProperty("user.dir")+"/src/main/resources/imagenes" + path);
         if (path.contains("html") || path.contains("js")|| path.contains("ico")) {
@@ -181,6 +208,10 @@ public class Server {
         }
     }
 
+    /**
+     * Metodo de tipo static que retorna un entero
+     * @return 36000 que es el puerto por donde corre el socket
+     */
     private static int getPort() {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
